@@ -6,12 +6,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="table">
-        <div class="task">
-            <spane class="task-title">первое задание</spane>
-            <spane class="task-content">описание задания.</spane>
+    <div class="table" id="table">
+        <div class="task" id="task">
+            <div class="task-card" id="task-card">
+                <input class="task-title " type="text" value="Задание">
+                <textarea class="task-content">Описание задания</textarea>
+                <input type="button" class="button-close-task" value="X" onclick="RemoveParent(this)">
+            </div>
+            <input class="button-add-card" type="button" value="Add card" onclick="ClickAddCard(this)">
+            <input id="button-close-task" type="button" class="button-close-task" value="X" onclick="RemoveParent(this)">
         </div>
+        <input type="button" class="button-add-task" value="Add task" onclick="ClickAddTask(this)">
     </div>
-    <script  src="main.js"></script>
+    <script  src="build/main.bundle.js"></script>
 </body>
 </html>
