@@ -1,5 +1,4 @@
 let tasks = [];
-let cards = [];
 let table = document.getElementById('table');
 let abstractTask = document.getElementById('task').cloneNode(true);
 let abstractCard = document.getElementById('task-card').cloneNode(true);
@@ -7,9 +6,9 @@ let abstractCard = document.getElementById('task-card').cloneNode(true);
 document.addEventListener("DOMContentLoaded", ready);
 
 function ready(){
-    if (GetLocalStrorage('cards') != undefined)
-        cards = GetLocalStrorage('cards');
-    console.log('Loaded from localStorage: ', cards);
+    // if (GetLocalStrorage('cards') != undefined)
+        // cards = GetLocalStrorage('cards');
+    // console.log('Loaded from localStorage: ', cards);
 }
 
 class Task {
@@ -39,15 +38,13 @@ function ClickAddTask(sender) {
     let buf = abstractTask.cloneNode(true);
     table.appendChild(buf);
     table.appendChild(sender);
+    console.log(GetChildElements('task', table));
 }
 
 function ClickAddCard(sender) {
     let buf = abstractCard.cloneNode(true);
-    buf.setAttribute('idNumber', cards.length);
-    buf.removeAttribute('style');
     sender.parentNode.parentNode.appendChild(buf);
     sender.parentNode.parentNode.appendChild(sender.parentNode);
-    console.log(cards + ' test');
     cards.push(new Card(sender.parentNode.parentNode.childNodes[1].value,
                         sender.parentNode.parentNode.childNodes[3].value,
                         cards.length));
@@ -85,4 +82,14 @@ function ClickGetStorage(key) {
 
 function ClickClearStorage(key) {
     localStorage.clear();
+}
+
+function GetChildElements(cssClass, obj) {
+    let returnBuf = [];
+    Array.prototype.slice.call(obj.childNodes).forEach(function(element, index, array) {
+        if(element.getAttribute != undefined && element.getAttribute('class') === cssClass) {
+            returnBuf.push(obj);
+        }
+    });
+    return returnBuf;
 }

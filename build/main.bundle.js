@@ -4,7 +4,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var cards = [];
+var tasks = [];
 var table = document.getElementById('table');
 var abstractTask = document.getElementById('task').cloneNode(true);
 var abstractCard = document.getElementById('task-card').cloneNode(true);
@@ -12,9 +12,28 @@ var abstractCard = document.getElementById('task-card').cloneNode(true);
 document.addEventListener("DOMContentLoaded", ready);
 
 function ready() {
-    if (GetLocalStrorage('cards') != undefined) cards = GetLocalStrorage('cards');
-    console.log('Loaded from localStorage: ', cards);
+    // if (GetLocalStrorage('cards') != undefined)
+    // cards = GetLocalStrorage('cards');
+    // console.log('Loaded from localStorage: ', cards);
 }
+
+var Task = function () {
+    function Task(arrayCards, id) {
+        _classCallCheck(this, Task);
+
+        this.cards = [];
+        this.id = id;
+    }
+
+    _createClass(Task, [{
+        key: 'toString',
+        value: function toString() {
+            return id + ', ' + cards.toString();
+        }
+    }]);
+
+    return Task;
+}();
 
 var Card = function () {
     function Card(title, body, id) {
@@ -39,15 +58,13 @@ function ClickAddTask(sender) {
     var buf = abstractTask.cloneNode(true);
     table.appendChild(buf);
     table.appendChild(sender);
+    console.log(GetChildElements('task', table));
 }
 
 function ClickAddCard(sender) {
     var buf = abstractCard.cloneNode(true);
-    buf.setAttribute('idNumber', cards.length);
-    buf.removeAttribute('style');
     sender.parentNode.parentNode.appendChild(buf);
     sender.parentNode.parentNode.appendChild(sender.parentNode);
-    console.log(cards + ' test');
     cards.push(new Card(sender.parentNode.parentNode.childNodes[1].value, sender.parentNode.parentNode.childNodes[3].value, cards.length));
 }
 
@@ -85,6 +102,12 @@ function ClickClearStorage(key) {
     localStorage.clear();
 }
 
-// console.log('test');
-// localStorage.setItem("test", JSON.stringify({"filed1": "1", "filed2" : "два"}));
-// console.log(JSON.parse(localStorage.getItem("test")));
+function GetChildElements(cssClass, obj) {
+    var returnBuf = [];
+    Array.prototype.slice.call(obj.childNodes).forEach(function (element, index, array) {
+        if (element.getAttribute != undefined && element.getAttribute('class') === cssClass) {
+            returnBuf.push(obj);
+        }
+    });
+    return returnBuf;
+}
