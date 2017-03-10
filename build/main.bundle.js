@@ -4,55 +4,87 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * Created by root on 08.03.17.
- */
-var tasks = [];
+var cards = [];
 var table = document.getElementById('table');
-var btnCloseTask = document.getElementById('button-close-task').cloneNode(true);
-var abstractTask = document.getElementById('task');
-var abstractCard = document.getElementById('task-card');
+var abstractTask = document.getElementById('task').cloneNode(true);
+var abstractCard = document.getElementById('task-card').cloneNode(true);
 
-var Task = function () {
-    function Task(title, body, id) {
-        _classCallCheck(this, Task);
+document.addEventListener("DOMContentLoaded", ready);
+
+function ready() {
+    if (GetLocalStrorage('cards') != undefined) cards = GetLocalStrorage('cards');
+    console.log('Loaded from localStorage: ', cards);
+}
+
+var Card = function () {
+    function Card(title, body, id) {
+        _classCallCheck(this, Card);
 
         this.title = title;
         this.body = body;
         this.id = id;
     }
 
-    _createClass(Task, [{
+    _createClass(Card, [{
         key: 'toString',
         value: function toString() {
             return '(' + this.title + ', ' + this.body + ')';
         }
     }]);
 
-    return Task;
+    return Card;
 }();
 
 function ClickAddTask(sender) {
     var buf = abstractTask.cloneNode(true);
     table.appendChild(buf);
     table.appendChild(sender);
-    tasks.push(new Task('', '', tasks.length));
 }
 
 function ClickAddCard(sender) {
     var buf = abstractCard.cloneNode(true);
-    sender.parentNode.appendChild(buf);
-    sender.parentNode.appendChild(sender);
-    sender.parentNode.appendChild(btnCloseTask);
+    buf.setAttribute('idNumber', cards.length);
+    buf.removeAttribute('style');
+    sender.parentNode.parentNode.appendChild(buf);
+    sender.parentNode.parentNode.appendChild(sender.parentNode);
+    console.log(cards + ' test');
+    cards.push(new Card(sender.parentNode.parentNode.childNodes[1].value, sender.parentNode.parentNode.childNodes[3].value, cards.length));
 }
 
-function RemoveParent(sender) {
-    console.log(sender.parentNode);
-    sender.parentNode.remove();
+function ClickCloseTask(sender) {
+    sender.parentNode.parentNode.remove();
 }
 
-console.log(tasks.length);
+function ClickCloseCard(sender) {
+    sender.parentNode.parentNode.remove();
+    cards[sender.parentNode.parentNode.getAttribute('idNumber')] = null;
+    SetLocalStrorage('cards', cards);
+}
 
-console.log('test');
-localStorage.setItem("test", JSON.stringify({ "filed1": "1", "filed2": "два" }));
-console.log(JSON.parse(localStorage.getItem("test")));
+function ClickSaveCard(sender) {
+    var id = sender.parentNode.parentNode.getAttribute('idNumber');
+    cards[id].title = sender.parentNode.parentNode.childNodes[1].value;
+    cards[id].body = sender.parentNode.parentNode.childNodes[3].value;
+    SetLocalStrorage('cards', cards);
+}
+
+function SetLocalStrorage(key, obj) {
+    localStorage.setItem(key, JSON.stringify(obj));
+    console.log('set localStorage: ', cards);
+}
+
+function GetLocalStrorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function ClickGetStorage(key) {
+    console.log(GetLocalStrorage(key));
+}
+
+function ClickClearStorage(key) {
+    localStorage.clear();
+}
+
+// console.log('test');
+// localStorage.setItem("test", JSON.stringify({"filed1": "1", "filed2" : "два"}));
+// console.log(JSON.parse(localStorage.getItem("test")));

@@ -7,17 +7,24 @@
 </head>
 <body>
     <div class="table" id="table">
-        <div class="task" id="task">
-            <div class="task-card" id="task-card">
-                <input class="task-title " type="text" value="Задание">
-                <textarea class="task-content">Описание задания</textarea>
-                <input type="button" class="button-close-task" value="X" onclick="RemoveParent(this)">
+        <div class="task-card" id="task-card" style="display: none">
+            <input id="task-title" class="task-title " type="text" value="Задание">
+            <textarea id="task-content" class="task-content">Описание задания</textarea>
+            <div class="layout-buttons-card">
+                <input type="button" class="button-close-task" value="X" onclick="ClickCloseCard(this)">
             </div>
-            <input class="button-add-card" type="button" value="Add card" onclick="ClickAddCard(this)">
-            <input id="button-close-task" type="button" class="button-close-task" value="X" onclick="RemoveParent(this)">
+        </div>
+        <div class="task" id="task">
+            <div class="layout-buttons">
+                <input class="button-add-card" type="button" value="Add card" onclick="ClickAddCard(this)">
+                <input type="button" class="button-save-task" value="&#128190;" onclick="ClickSaveCard(this)">
+                <input id="button-close-task" type="button" class="button-close-task" value="X" onclick="ClickCloseTask(this)">
+            </div>
         </div>
         <input type="button" class="button-add-task" value="Add task" onclick="ClickAddTask(this)">
     </div>
     <script  src="build/main.bundle.js"></script>
+    <input type="button" value="getStorage" onclick="ClickGetStorage('cards')">
+    <input type="button" value="clearStorage" onclick="ClickClearStorage('cards')">
 </body>
 </html>

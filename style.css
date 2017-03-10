@@ -15,7 +15,7 @@ body {  margin: 0;  }
     border: 2px solid white;
     box-shadow: 0 0 4px rgba(0,0,0,1);
     padding: 9px;
-    width: 260px;
+    width: 282px;
 }
 
 .task-card {
@@ -51,29 +51,37 @@ body {  margin: 0;  }
     resize: none;
     border: none;
     text-align: left;
-
+    padding: 4px;
 }
 
-.button-add-card {
-    margin-top: 10px;
-    box-shadow: 0 0 4px rgba(0,0,0,1);
-}
 
-.button-add-task {
+.button-add-task, .button-save-task, .button-close-task, .button-add-card{
     margin-top: 10px;
     height: 30px;
     box-shadow: 0 0 4px rgba(0,0,0,1);
+}
+
+.layout-buttons-card > .button-close-task {
+    box-shadow: none;
+}
+
+.layout-buttons > .button-save-task {
+    width: 120px;
 }
 
 .task:nth-child(1) {
     display: none;
 }
 
-.button-close-task {
-    width: 30px;
-    height: 30px;
-    padding:0;
-    margin: 2px 0 0 0;
+.layout-buttons-card, .layout-buttons {
+    display: flex;
+    justify-content: space-between;
 }
 
-
+.button-save-task {
+    position: inherit;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
