@@ -69,10 +69,6 @@ body {  margin: 0;  }
     width: 120px;
 }
 
-.task:nth-child(1) {
-    display: none;
-}
-
 .layout-buttons-card, .layout-buttons {
     display: flex;
     justify-content: space-between;
@@ -84,4 +80,13 @@ body {  margin: 0;  }
     height: 30px;
     padding: 0;
     margin: 10px 0 0 0;
+}
+
+.layout-buttons-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.layout-buttons-table > .button-add-task, .button-save-task {
+    width: 100px;
 }

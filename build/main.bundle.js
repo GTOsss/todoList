@@ -5,23 +5,24 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var tasks = [];
-var table = document.getElementById('table');
-var abstractTask = document.getElementById('task').cloneNode(true);
-var abstractCard = document.getElementById('task-card').cloneNode(true);
+var table, abstractTask, abstractCard;
 
 document.addEventListener("DOMContentLoaded", ready);
 
 function ready() {
-    // if (GetLocalStrorage('cards') != undefined)
-    // cards = GetLocalStrorage('cards');
-    // console.log('Loaded from localStorage: ', cards);
+    table = document.getElementById('table');
+    abstractTask = document.getElementById('task').cloneNode(true);
+    document.getElementById('task').remove();
+    abstractCard = document.getElementById('task-card').cloneNode(true);
+    document.getElementById('task-card').remove();
+    StartLoad(GetLocalStorage('tasks'));
 }
 
 var Task = function () {
     function Task(arrayCards, id) {
         _classCallCheck(this, Task);
 
-        this.cards = [];
+        this.cards = arrayCards;
         this.id = id;
     }
 
@@ -56,16 +57,16 @@ var Card = function () {
 
 function ClickAddTask(sender) {
     var buf = abstractTask.cloneNode(true);
+    buf.removeAttribute('style');
     table.appendChild(buf);
-    table.appendChild(sender);
-    console.log(GetChildElements('task', table));
+    table.appendChild(sender.parentNode);
 }
 
 function ClickAddCard(sender) {
     var buf = abstractCard.cloneNode(true);
+    buf.removeAttribute('style');
     sender.parentNode.parentNode.appendChild(buf);
     sender.parentNode.parentNode.appendChild(sender.parentNode);
-    cards.push(new Card(sender.parentNode.parentNode.childNodes[1].value, sender.parentNode.parentNode.childNodes[3].value, cards.length));
 }
 
 function ClickCloseTask(sender) {
@@ -74,28 +75,32 @@ function ClickCloseTask(sender) {
 
 function ClickCloseCard(sender) {
     sender.parentNode.parentNode.remove();
-    cards[sender.parentNode.parentNode.getAttribute('idNumber')] = null;
-    SetLocalStrorage('cards', cards);
 }
 
-function ClickSaveCard(sender) {
-    var id = sender.parentNode.parentNode.getAttribute('idNumber');
-    cards[id].title = sender.parentNode.parentNode.childNodes[1].value;
-    cards[id].body = sender.parentNode.parentNode.childNodes[3].value;
-    SetLocalStrorage('cards', cards);
+function ClickSave(sender) {
+    tasks = [];
+    GetChildElements('task', table).forEach(function (element) {
+        var bufCurds = [];
+        GetChildElements('task-card', element).forEach(function (element) {
+            bufCurds.push(new Card(element.childNodes[1].value, element.childNodes[3].value, 0));
+        });
+        tasks.push(new Task(bufCurds, 0));
+    });
+
+    SetLocalStorage('tasks', tasks);
 }
 
-function SetLocalStrorage(key, obj) {
+function SetLocalStorage(key, obj) {
     localStorage.setItem(key, JSON.stringify(obj));
-    console.log('set localStorage: ', cards);
+    console.log('set localStorage: ', tasks);
 }
 
-function GetLocalStrorage(key) {
+function GetLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key));
 }
 
 function ClickGetStorage(key) {
-    console.log(GetLocalStrorage(key));
+    console.log(GetLocalStorage(key));
 }
 
 function ClickClearStorage(key) {
@@ -106,8 +111,25 @@ function GetChildElements(cssClass, obj) {
     var returnBuf = [];
     Array.prototype.slice.call(obj.childNodes).forEach(function (element, index, array) {
         if (element.getAttribute != undefined && element.getAttribute('class') === cssClass) {
-            returnBuf.push(obj);
+            returnBuf.push(element);
         }
     });
     return returnBuf;
+}
+
+function StartLoad(tasks) {
+    tasks.forEach(function (element) {
+        var bufTask = abstractTask.cloneNode(true);
+        bufTask.removeAttribute('style');
+        element.cards.forEach(function (el) {
+            var bufCard = abstractCard.cloneNode(true);
+            bufCard.removeAttribute('style');
+            bufCard.childNodes[1].value = el.title;
+            bufCard.childNodes[3].value = el.body;
+            bufTask.appendChild(bufCard);
+            bufTask.appendChild(GetChildElements('layout-buttons', bufTask)[0]);
+        });
+        table.appendChild(bufTask);
+        table.appendChild(GetChildElements('layout-buttons-table', table)[0]);
+    });
 }
