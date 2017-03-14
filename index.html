@@ -1,30 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Bootstrap Template</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" media="all">
+    <!--<link href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" media="screen" media="all">-->
+    <!--<link href="styles/todoStyle.css" rel="stylesheet">-->
+    <!--<link href="styles/test.css" rel="stylesheet">-->
+</head>
+<body>
+    <div class="row" id="table">
+        <div class="col-md-2" id="task" style="display: none">
+            <div class="btn-group" id="layout-buttons">
+                <input id="button-add-card" class="btn btn-primary" type="button" value="Add card">
+                <input id="button-close-task" class="btn btn-danger" type="button" value="X">
+            </div>
+        </div>
 
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="testbootsrap.css" rel="stylesheet">
+        <div id="task-card" class="panel panel-primary" style="display: none">
+            <input id="task-title" class="panel-title" type="text" placeholder="Задание">
+            <textarea id="task-content" class="panel-body" placeholder="Описание задания"></textarea>
+            <div>
+                <input id="button-close-card" class="btn btn-danger" type="button" value="X">
+            </div>
+        </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4"></div>
+        <div id="layout-buttons-table" class="btn-block">
+            <input type="button" id="button-add-task" class="btn btn-primary" value="Add task">
+            <input type="button" id="button-save-task" class="btn btn-success" value="&#128190;">
         </div>
     </div>
 
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-</head>
-<body>
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////-->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
+    <!--<div class="container" id="table">-->
+        <!--<div class="col-md-4" id="task">-->
+            <!--<div class="btn-group" id="layout-buttons">-->
+                <!--<input id="button-add-card" class="btn btn-primary" type="button" value="Add card">-->
+                <!--<input id="button-close-task" class="btn btn-danger" type="button" value="X">-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div id="task-card" class="col-md-10">-->
+            <!--<input id="task-title" type="text" placeholder="Задание">-->
+            <!--<textarea id="task-content" placeholder="Описание задания"></textarea>-->
+            <!--<div>-->
+                <!--<input id="button-close-card" type="button" value="X">-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div id="layout-buttons-table" class="btn-block">-->
+            <!--<input type="button" id="button-add-task" class="btn btn-primary" value="Add task">-->
+            <!--<input type="button" id="button-save-task" class="btn btn-success" value="&#128190;">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="panel panel-primary">
+        <p class="panel-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, nobis.</p>
+        <p class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, nobis.</p>
+    </div>
+    <input id="button-get-Lstorage" type="button" value="getStorage">
+    <input id="button-clear-Lstorage" type="button" value="clearStorage">
+    <script src="build/main.webpack.js"></script>
 </body>
 </html>

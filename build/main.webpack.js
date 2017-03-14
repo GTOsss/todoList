@@ -160,7 +160,7 @@ function ClickAddCard() {
     buf.removeAttribute('style');
     event.currentTarget.parentNode.parentNode.appendChild(buf);
     event.currentTarget.parentNode.parentNode.appendChild(this.parentNode);
-    GetChildElements('button-close-task', buf.childNodes[5])[0].addEventListener('click', ClickCloseCard);
+    GetChildElements('button-close-card', buf.childNodes[5])[0].addEventListener('click', ClickCloseCard);
 }
 
 function ClickCloseTask() {
@@ -200,10 +200,10 @@ function ClickClearStorage() {
     localStorage.clear();
 }
 
-function GetChildElements(cssClass, obj) {
+function GetChildElements(id, obj) {
     var returnBuf = [];
     Array.prototype.slice.call(obj.childNodes).forEach(function (element, index, array) {
-        if (element.getAttribute != undefined && element.getAttribute('class') === cssClass) {
+        if (element.getAttribute != undefined && element.getAttribute('id') === id) {
             returnBuf.push(element);
         }
     });
@@ -222,7 +222,7 @@ function StartLoad(tasks) {
             bufCard.removeAttribute('style');
             bufCard.childNodes[1].value = el.title;
             bufCard.childNodes[3].value = el.body;
-            GetChildElements('button-close-task', bufCard.childNodes[5])[0].addEventListener('click', ClickCloseCard);
+            GetChildElements('button-close-card', bufCard.childNodes[5])[0].addEventListener('click', ClickCloseCard);
             bufTask.appendChild(bufCard);
             bufTask.appendChild(GetChildElements('layout-buttons', bufTask)[0]);
         });

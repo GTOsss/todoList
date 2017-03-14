@@ -1,4 +1,9 @@
-.row .col-rg-4{
-    height: 120px;
-    background-color: #333;
+.row div {
+    /*height: 300px;*/
+    background-color: #c1c1c1;
+    /*border: 2px solid black;*/
+}
+
+.container {
+    /*width: 100%;*/
 }
