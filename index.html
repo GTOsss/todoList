@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="row" id="table">
-        <div class="col-md-2" id="task" style="display: none">
+        <div class="col-md-2 pane panel-info" id="task" style="display: none">
             <div class="btn-group" id="layout-buttons">
                 <input id="button-add-card" class="btn btn-primary" type="button" value="Add card">
                 <input id="button-close-task" class="btn btn-danger" type="button" value="X">
@@ -19,9 +19,9 @@
         </div>
 
         <div id="task-card" class="panel panel-primary" style="display: none">
-            <input id="task-title" class="panel-title" type="text" placeholder="Задание">
-            <textarea id="task-content" class="panel-body" placeholder="Описание задания"></textarea>
-            <div>
+            <input id="task-title" class="panel-heading input-sm form-control" type="text" placeholder="Задание">
+            <textarea id="task-content" class="panel-body form-control" placeholder="Описание задания"></textarea>
+            <div class="panel-body">
                 <input id="button-close-card" class="btn btn-danger" type="button" value="X">
             </div>
         </div>
@@ -32,33 +32,7 @@
         </div>
     </div>
 
-    <!--//////////////////////////////////////////////////////////////////////////////////////////////////-->
 
-    <!--<div class="container" id="table">-->
-        <!--<div class="col-md-4" id="task">-->
-            <!--<div class="btn-group" id="layout-buttons">-->
-                <!--<input id="button-add-card" class="btn btn-primary" type="button" value="Add card">-->
-                <!--<input id="button-close-task" class="btn btn-danger" type="button" value="X">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div id="task-card" class="col-md-10">-->
-            <!--<input id="task-title" type="text" placeholder="Задание">-->
-            <!--<textarea id="task-content" placeholder="Описание задания"></textarea>-->
-            <!--<div>-->
-                <!--<input id="button-close-card" type="button" value="X">-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div id="layout-buttons-table" class="btn-block">-->
-            <!--<input type="button" id="button-add-task" class="btn btn-primary" value="Add task">-->
-            <!--<input type="button" id="button-save-task" class="btn btn-success" value="&#128190;">-->
-        <!--</div>-->
-    <!--</div>-->
-    <div class="panel panel-primary">
-        <p class="panel-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, nobis.</p>
-        <p class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, nobis.</p>
-    </div>
     <input id="button-get-Lstorage" type="button" value="getStorage">
     <input id="button-clear-Lstorage" type="button" value="clearStorage">
     <script src="build/main.webpack.js"></script>
